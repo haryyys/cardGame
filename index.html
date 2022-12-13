@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Card Game</title>
+  <script src="script.js" type="module"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ff">
+  <div class="computer-deck deck"></div>
+  <div class="computer-card-slot card-slot"></div>
+  <div class="text"></div>
+  <div class="player-deck deck"></div>
+  <div class="player-card-slot card-slot"></div>
+</div>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap');
+
+*, *::after, *::before { 
+    box-sizing: border-box;
+    cursor: pointer;
+  } 
+
+  body {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 4rem);
+    grid-template-rows: 7rem 2rem 7rem;
+    gap: .5rem;
+    font-family: 'Rubik Spray Paint', cursive;
+    justify-content: center;
+    padding-top: 10vh;
+    background-size: initial;
+    background-image: url('https://i.ibb.co/vh4Mbwv/background4.jpg'); object-fit: cover;
+    /* background4.jpg */
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    
+  }
+
+  .ff{
+    position: relative;
+    right: 10vw;
+  }
+  
+  .deck {
+    height: 30vh;
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    border-radius: .5rem;
+    color: white;
+    user-select: none;
+  }
+  
+  .computer-deck {
+background-image: url('https://i.ibb.co/Rp42Yf5/cardback2.webp');
+/* cardback2.jpg */
+opacity: 0.9;
+background-size:cover;
+color: white;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 0, 0, 0.3);
+  }
+  
+  .player-deck {
+background-image: url('https://i.ibb.co/Rp42Yf5/cardback2.webp');
+/* cardback2.jpg */
+opacity: 0.9;
+background-size: cover;
+color: white;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+  }
+  
+  .text {
+    position: relative;
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    width: 30vw;
+    height: 20vh;
+    font-size: 5vw;
+    margin-left: 0vw;
+    right: 2.5vw;
+    color: #ffffff;
+    background-image: url('https://i.ibb.co/r7nGPms/text2.jpg');
+    /* text2.jpg */
+    background-size: 30vw;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .card {
+    position: relative;
+    border: 1px solid black;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    user-select: none;
+    height: 30vh;
+    width: 10vw;
+    margin-left: 15vw;
+    bottom: 30vh;
+    
+  }
+  
+  .card.red {
+    color: red;
+    font-size: 10vw;
+    background: rgba(255, 0, 0, 0.25);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(13px);
+border: 1px solid rgba(255, 0, 0, 0.3);
+  }
+  
+  .card.black {
+    color: rgb(135, 112, 112);
+    font-size: 10vw;
+background: rgba(0, 0, 0, 0.25);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .card-slot{
+    height: 1vh;
+    width: 1vw;
+  }
+  
+  .card::before,
+  .card::after {
+    position: absolute;
+    content: attr(data-value);
+    font-size: 2vw;
+  }
+  
+  .card::before {
+    top: .5rem;
+    left: .5rem;
+    
+    
+  }
+  
+  .card::after {
+    bottom: .5rem;
+    right: .5rem;
+    transform: rotate(180deg);
+    
+  }
+
+  
+
+  @media screen and (max-width: 1260px){
+    .deck{
+      width: 12vw;
+      font-size: 7vw;
+    }
+    .card{
+      width: 12vw;
+    }
+    .text{
+      font-size: 7vw;
+    }
+    .card::before,
+    .card::after {
+      font-size: 3vw;
+    }
+    .card.red, .card.black{
+      font-size: 15vw;
+    }
+  }
+
+  @media screen and (max-width: 1050px){
+    .deck{
+      width: 13vw;
+      font-size: 8vw;
+    }
+    .card{
+      width: 13vw;
+      left: 5vw;
+    }
+    .card::before,
+    .card::after {
+      font-size: 4vw;
+    }
+    .card.red, .card.black{
+      font-size: 16vw;
+    }
+    .text{
+      margin-left: 4vw;
+    }
+  }
+
+  @media screen and (max-width: 960px){
+    .deck{
+      width: 14vw;
+      font-size: 9vw;
+    }
+    .card{
+      width: 14vw;
+    }
+    .text{
+      font-size: 7vw;
+    }
+    .card::before,
+    .card::after {
+      font-size: 3vw;
+    }
+    .card.red, .card.black{
+      font-size: 15vw;
+    }
+    .text{
+      font-size: 10vw;
+    }
+  }
+  @media screen and (max-width: 835px) {
+    .deck{
+      width: 20vw;
+      margin-left: -16vw;
+      font-size: 11vw;
+    }
+
+    .card{
+      width: 20vw;
+      left: 11vw;
+    }
+
+    .text{
+      width: 50vw;
+      right: 15vw;
+      font-size: 15vw;
+      background-size: 70vw;
+    }
+
+    .card::before,
+  .card::after {
+    font-size: 6vw;
+  }
+  .card.red, .card.black{
+    font-size: 15vw;
+  } 
+  }
+  @media screen and (max-width: 650px) {
+    .deck{
+      width: 25vw;
+      margin-left: -16vw;
+      font-size: 16vw;
+    }
+
+    .card{
+      width: 25vw;
+      left: 11vw;
+    }
+
+    .text{
+      width: 50vw;
+      margin-left: 7vw;
+      font-size: 18vw;
+      background-size: 70vw;
+    }
+
+    .card::before,
+  .card::after {
+    font-size: 8vw;
+  }
+  .card.red, .card.black{
+    font-size: 20vw;
+  } 
+  }
+  @media screen and (max-width: 460px) {
+    .deck{
+      width: 30vw;
+      margin-left: -16vw;
+      font-size: 18vw;
+    }
+
+    .card{
+      width: 30vw;
+      left: 11vw;
+    }
+
+    .text{
+      width: 50vw;
+      margin-left: 7vw;
+      font-size: 20vw;
+      background-size: 70vw;
+    }
+
+    .card::before,
+  .card::after {
+    font-size: 10vw;
+  }
+  .card.red, .card.black{
+    font-size: 25vw;
+  } 
+  }
+
+  @media screen and (max-width: 450px) {
+    .deck{
+      width: 40vw;
+      margin-left: -18vw;
+      font-size: 20vw;
+    }
+
+    .card{
+      width: 40vw;
+      left: 14vw;
+    }
+
+    .text{
+      width: 55vw;
+      margin-left: 15vw;
+      font-size: 22vw;
+      background-size: 70vw;
+    }
+
+    .card::before,
+  .card::after {
+    font-size: 10vw;
+  }
+  .card.red, .card.black{
+    font-size: 35vw;
+  } 
+  }
+</style>
+</html>
